@@ -2,6 +2,7 @@ import path from 'path'
 import { release, version } from 'os'
 import { createServer as createServerHttp } from 'http'
 import './files/c.js'
+import { fileURLToPath } from 'node:url';
 
 const random = Math.random();
 let unknownObject;
@@ -16,7 +17,7 @@ console.log(`Release ${release()}`);
 console.log(`Version ${version()}`);
 console.log(`Path segment separator is "${path.sep}"`);
 
-const scriptPath = new URL(import.meta.url).pathname
+const scriptPath = fileURLToPath(import.meta.url)
 
 console.log(`Path to current file is ${scriptPath}`);
 console.log(`Path to current directory is ${path.dirname(scriptPath)}`);
