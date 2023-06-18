@@ -1,17 +1,13 @@
 import { createReadStream, createWriteStream } from "fs";
 import { createGunzip } from "zlib";
+import { pipeline } from 'stream/promises';
 
-const decompressFile = (file, outputFile) => new Promise((resolve, reject) => {
-    createReadStream(file)
-    .on('error', reject)
-    .pipe(createGunzip().on('error', reject))
-    .pipe(
+const decompressFile = (file, outputFile) => 
+    pipeline(
+        createReadStream(file),
+        createGunzip(),
         createWriteStream(outputFile)
-        .on('error', reject)
     )
-    .on('end', () => resolve())
-})
-
 
 /* 
 decompress.js - implement function that decompresses archive.gz back to the fileToCompress.txt with same content as before compression using zlib and Streams API
