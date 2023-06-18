@@ -1,20 +1,18 @@
 import { createHash } from 'node:crypto'
 import { createReadStream } from 'node:fs';
+import { pipeline } from 'node:stream/promises';
 
 const getFileHash = (file) => new Promise((resolve, reject) => {
         const hash = createHash('sha256')
-        const fileStream = createReadStream(file).on('error', reject)
+        const fileStream = createReadStream(file)
+        
+        fileStream.on('error', reject)
 
-        fileStream.on('readable', () => {
-            while(true) {
-                const chunk = fileStream.read()
-                if(chunk === null) {
-                    return
-                }
-                hash.update(chunk)
-            }
+        fileStream.on('data', (chunk) => {
+            hash.update(chunk)
         })
-        .on('end', () => {
+
+        fileStream.on('end', () => {
             resolve(hash.digest('hex'))
         })
     })
@@ -23,7 +21,8 @@ const getFileHash = (file) => new Promise((resolve, reject) => {
 calcHash.js - implement function that calculates SHA256 hash for file fileToCalculateHashFor.txt and logs it into console as hex
 */
 const calculateHash = async () => {
-    console.log(await getFileHash('src/hash/files/fileToCalculateHashFor.txt'));
+    const hash = await getFileHash('src/hash/files/fileToCalculateHashFor.txt')
+    console.log(hash);
 };
 
 await calculateHash();
