@@ -6,11 +6,11 @@ delete.js - implement function that deletes file fileToRemove.txt (if there's no
 */
 const remove = async () => {
     const fileToRemove = getAbsolutePath('files/fileToRemove.txt')
-   
-   if(!(await exists(fileToRemove))) {
-       throw new Error('FS operation failed')
-   }
-   
+
+    if (!(await exists(fileToRemove))) {
+        throw new Error('FS operation failed')
+    }
+
     await fs.unlink(fileToRemove);
 };
 

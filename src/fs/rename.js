@@ -8,7 +8,7 @@ const rename = async () => {
     const renameFrom = getAbsolutePath('./files/wrongFilename.txt');
     const renameTo = getAbsolutePath('./files/properFilename.md');
 
-    if(!(await exists(renameFrom)) || await exists(renameTo)) {
+    if (!(await exists(renameFrom)) || await exists(renameTo)) {
         throw new Error('FS operation failed')
     }
 

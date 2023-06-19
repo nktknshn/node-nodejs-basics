@@ -2,7 +2,7 @@
 import { createReadStream, createWriteStream } from 'fs';
 import { pipeline } from 'stream/promises';
 import { createGzip } from 'zlib'
-import { getAbsolutePath } from './helpers';
+import { getAbsolutePath } from './helpers.js';
 
 const compressFile =  (file, outputFile) => pipeline(
     createReadStream(file),

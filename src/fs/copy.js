@@ -8,22 +8,18 @@ const copy = async () => {
     const copyFrom = getAbsolutePath('./files')
     const copyTo = getAbsolutePath('./files_copy')
 
-    if(!(await exists(copyFrom))) {
+    if (!(await exists(copyFrom)) || await exists(copyTo)) {
         throw new Error('FS operation failed')
     }
 
-    if(await exists(copyTo)) {
-        throw new Error('FS operation failed')
-    }
-    
     await fs.mkdir(copyTo)
-    
+
     const dir = await fs.opendir(copyFrom)
 
-    while(true) {
+    while (true) {
         const item = await dir.read()
 
-        if(item === null){
+        if (item === null) {
             break
         }
 

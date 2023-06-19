@@ -7,10 +7,10 @@ create.js - implement function that creates new file fresh.txt with content I am
 const create = async () => {
     const path = getAbsolutePath('./files/fresh.txt')
 
-    if(await exists(path)) {
+    if (await exists(path)) {
         throw new Error('FS operation failed')
     }
-    
+
     await fs.writeFile(path, 'I am fresh and young');
 };
 

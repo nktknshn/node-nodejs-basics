@@ -7,16 +7,16 @@ list.js - implement function that prints all array of filenames from `files` fol
 const list = async () => {
     const files = getAbsolutePath('./files')
 
-    if(!(await exists(files))) {
+    if (!(await exists(files))) {
         throw new Error('FS operation failed')
     }
 
     const dir = await fs.opendir(files)
 
-    while(true) {
+    while (true) {
         const item = await dir.read()
 
-        if(item === null){
+        if (item === null) {
             break
         }
 

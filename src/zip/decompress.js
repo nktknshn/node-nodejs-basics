@@ -1,7 +1,7 @@
 import { createReadStream, createWriteStream } from "fs";
 import { createGunzip } from "zlib";
 import { pipeline } from 'stream/promises';
-import { getAbsolutePath } from "./helpers";
+import { getAbsolutePath } from "./helpers.js";
 
 const decompressFile = (file, outputFile) => 
     pipeline(

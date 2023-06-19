@@ -8,19 +8,19 @@ const parseArgs = () => {
 
     const args = process.argv.slice(2);
 
-    if(args.length < 2) {
+    if (args.length < 2) {
         return
     }
 
     const resultObject = {}
 
-    for(let i = 0; i < args.length - 1; i++) {
+    for (let i = 0; i < args.length - 1; i++) {
         const k = args[i]
         const v = args[i + 1]
 
-        if(k.startsWith('--')) {
+        if (k.startsWith('--')) {
             // if the property has no paired value go to the next property
-            if(v.startsWith('--')) {
+            if (v.startsWith('--')) {
                 continue
             }
             // remove --
@@ -29,8 +29,8 @@ const parseArgs = () => {
     }
 
     const resultString = Object.entries(resultObject)
-                .map(([k, v]) => `${k} is ${v}`)
-                .join(', ')
+        .map(([k, v]) => `${k} is ${v}`)
+        .join(', ')
 
     console.log(resultString)
 };

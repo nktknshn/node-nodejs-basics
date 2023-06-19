@@ -1,6 +1,6 @@
 import { createReadStream } from "fs";
 import { pipeline } from "stream/promises";
-import { getAbsolutePath } from "./helpers";
+import { getAbsolutePath } from "./helpers.js";
 
 const readToStdout = (file) =>
     pipeline(

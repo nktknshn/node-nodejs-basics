@@ -6,15 +6,15 @@ cp.js - implement function spawnChildProcess that receives array of arguments ar
 
 */
 import { spawn } from 'node:child_process'
-
 import path from 'path'
+
 const getAbsolutePath = (relativePath) => {
-    return path.join(path.dirname(new URL(import.meta.url).pathname), relativePath) 
+    return path.join(path.dirname(new URL(import.meta.url).pathname), relativePath)
 };
 
 const spawnChildProcess = async (args) => {
     const scriptPath = getAbsolutePath('files/script.js')
-    
+
     const script = spawn(
         'node', [scriptPath, ...(args ?? [])],
         {
@@ -23,10 +23,10 @@ const spawnChildProcess = async (args) => {
     )
 
     script.on('close', code => {
-        if(code == 0) { return }
+        if (code == 0) { return }
         console.error(`Child process stopped with code: ${code}`);
         script.kill()
     })
 };
 
-spawnChildProcess([1,2,3]);
+spawnChildProcess([1, 2, 3]);

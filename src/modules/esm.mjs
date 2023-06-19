@@ -8,7 +8,7 @@ const random = Math.random();
 let unknownObject;
 
 if (random > 0.5) {
-    unknownObject = await import('./files/a.json', { assert: { type: "json" } }).then(_ => _.default); 
+    unknownObject = await import('./files/a.json', { assert: { type: "json" } }).then(_ => _.default);
 } else {
     unknownObject = await import('./files/b.json', { assert: { type: "json" } }).then(_ => _.default);
 }

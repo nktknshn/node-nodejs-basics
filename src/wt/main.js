@@ -1,6 +1,5 @@
 import os from 'os'
 import { Worker } from 'node:worker_threads'
-
 import path from 'path'
 
 export const getAbsolutePath = (relativePath) => {

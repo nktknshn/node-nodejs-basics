@@ -7,6 +7,7 @@ read.js - implement function that prints content of the fileToRead.txt into cons
 */
 const read = async () => {
     const fileToRead = getAbsolutePath('./files/fileToRead.txt')
+    
     await pipeline(
         createReadStream(fileToRead),
         process.stdout

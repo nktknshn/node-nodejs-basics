@@ -1,6 +1,6 @@
 import { createWriteStream } from "fs";
 import { pipeline } from "stream/promises";
-import { getAbsolutePath } from "./helpers";
+import { getAbsolutePath } from "./helpers.js";
 
 const writeFromStdin = (file) =>
     pipeline(
