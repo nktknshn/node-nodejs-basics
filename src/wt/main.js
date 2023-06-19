@@ -1,6 +1,11 @@
 import os from 'os'
 import { Worker } from 'node:worker_threads'
 
+import path from 'path'
+
+export const getAbsolutePath = (relativePath) => {
+    return path.join(path.dirname(new URL(import.meta.url).pathname), relativePath) 
+};
 
 /* 
     main.js - implement function that creates number of worker threads (equal to the number of host machine logical CPU cores) from file worker.js 
@@ -24,7 +29,7 @@ const range = (to) => [...Array(to).keys()]
 
 const compute = (value) => new Promise((resolve, reject) => {
     const worker = new Worker(
-        './src/wt/worker.js', { workerData: { value} }
+        getAbsolutePath('worker.js'), { workerData: { value} }
     )
 
     worker.on('message', resolve)

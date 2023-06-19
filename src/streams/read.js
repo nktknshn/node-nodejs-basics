@@ -1,5 +1,6 @@
 import { createReadStream } from "fs";
 import { pipeline } from "stream/promises";
+import { getAbsolutePath } from "./helpers";
 
 const readToStdout = (file) =>
     pipeline(
@@ -13,7 +14,7 @@ read.js - implement function that reads file fileToRead.txt content using Readab
 const read = async () => {
     // Write your code here
     // createReadStream().pipe(process.stdout)
-    await readToStdout('./src/streams/files/fileToRead.txt'); 
+    await readToStdout(getAbsolutePath('files/fileToRead.txt')); 
 };
 
 await read();

@@ -3,29 +3,32 @@ args.js - implement function that parses command line arguments (given in format
 */
 const parseArgs = () => {
 
+    // properties without values and values without properties will be skipped
+    // only pairs `--property-name value` are included 
+
     const args = process.argv.slice(2);
 
     if(args.length < 2) {
         return
     }
 
-    const result = {}
+    const resultObject = {}
 
-    // properties without values and values without properties will be skipped
-    // only pairs `--property-name value` are included 
     for(let i = 0; i < args.length - 1; i++) {
         const k = args[i]
         const v = args[i + 1]
 
         if(k.startsWith('--')) {
+            // if the property has no paired value go to the next property
             if(v.startsWith('--')) {
                 continue
             }
-            result[k.slice(2)] = v
+            // remove --
+            resultObject[k.slice(2)] = v
         }
     }
 
-    const resultString = Object.entries(result)
+    const resultString = Object.entries(resultObject)
                 .map(([k, v]) => `${k} is ${v}`)
                 .join(', ')
 

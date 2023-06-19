@@ -1,6 +1,7 @@
 import { createReadStream, createWriteStream } from "fs";
 import { createGunzip } from "zlib";
 import { pipeline } from 'stream/promises';
+import { getAbsolutePath } from "./helpers";
 
 const decompressFile = (file, outputFile) => 
     pipeline(
@@ -14,8 +15,8 @@ decompress.js - implement function that decompresses archive.gz back to the file
 */
 const decompress = async () => {
     await decompressFile(
-        'src/zip/files/archive.gz',
-        'src/zip/files/fileToCompress.txt', 
+        getAbsolutePath('files/archive.gz'),
+        getAbsolutePath('files/fileToCompress.txt'), 
     ) 
 };
 

@@ -2,6 +2,7 @@
 import { createReadStream, createWriteStream } from 'fs';
 import { pipeline } from 'stream/promises';
 import { createGzip } from 'zlib'
+import { getAbsolutePath } from './helpers';
 
 const compressFile =  (file, outputFile) => pipeline(
     createReadStream(file),
@@ -14,8 +15,8 @@ compress.js - implement function that compresses file fileToCompress.txt to arch
 */
 const compress = async () => {
     await compressFile(
-        'src/zip/files/fileToCompress.txt', 
-        'src/zip/files/archive.gz'
+        getAbsolutePath('files/fileToCompress.txt'), 
+        getAbsolutePath('files/archive.gz')
     ) 
 };
 

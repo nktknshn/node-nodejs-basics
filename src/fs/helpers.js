@@ -8,3 +8,8 @@ export const exists = async (path) => {
         return false;
     }
 }
+
+import path from 'path'
+export const getAbsolutePath = (relativePath) => {
+    return path.join(path.dirname(new URL(import.meta.url).pathname), relativePath) 
+};
