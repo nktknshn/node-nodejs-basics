@@ -1,11 +1,12 @@
 import os from 'os'
 import { Worker } from 'node:worker_threads'
 import path from 'path'
+import { fileURLToPath } from 'url';
 
-const getAbsolutePath = (relativePath) => {
+export const getAbsolutePath = (relativePath) => {
     return path.join(
-        path.dirname(new URL(import.meta.url).pathname), 
-        ...relativePath.split(path.sep)
+        path.dirname(fileURLToPath(import.meta.url)), 
+        ...relativePath.split('/')
     )
 };
 
