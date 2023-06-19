@@ -1,5 +1,40 @@
+import { createHash } from 'node:crypto';
+import { createReadStream } from 'node:fs';
+import path from 'path';
+
+import { fileURLToPath } from 'url';
+
+export const getAbsolutePath = (relativePath) => {
+    return path.join(
+        path.dirname(fileURLToPath(import.meta.url)), 
+        ...relativePath.split('/')
+    )
+};
+
+const getFileHash = (file) => new Promise((resolve, reject) => {
+    const hash = createHash('sha256')
+    const fileStream = createReadStream(file)
+
+    fileStream.on('error', reject)
+
+    fileStream.on('data', (chunk) => {
+        hash.update(chunk)
+    })
+
+    fileStream.on('end', () => {
+        resolve(hash.digest('hex'))
+    })
+})
+
+/* 
+calcHash.js - implement function that calculates SHA256 hash for file fileToCalculateHashFor.txt and logs it into console as hex
+*/
 const calculateHash = async () => {
-    // Write your code here 
+    const hash = await getFileHash(
+        getAbsolutePath('files/fileToCalculateHashFor.txt')
+    )
+
+    console.log(hash);
 };
 
 await calculateHash();
