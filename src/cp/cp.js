@@ -6,10 +6,13 @@ cp.js - implement function spawnChildProcess that receives array of arguments ar
 
 */
 import { spawn } from 'node:child_process'
-import path from 'path'
+import path from 'node:path'
 
 const getAbsolutePath = (relativePath) => {
-    return path.join(path.dirname(new URL(import.meta.url).pathname), relativePath)
+    return path.join(
+        path.dirname(new URL(import.meta.url).pathname), 
+        ...relativePath.split(path.sep)
+    )
 };
 
 const spawnChildProcess = async (args) => {

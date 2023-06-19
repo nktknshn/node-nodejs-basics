@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs';
 import { exists, getAbsolutePath } from './helpers.js';
-
+import path from 'path'
 /* 
 copy.js - implement function that copies folder files files with all its content into folder files_copy at the same level (if files folder doesn't exists or files_copy has already been created Error with message FS operation failed must be thrown)
 */
@@ -23,7 +23,9 @@ const copy = async () => {
             break
         }
 
-        await fs.copyFile(`${copyFrom}/${item.name}`, `${copyTo}/${item.name}`)
+        await fs.copyFile(
+            path.join(copyFrom, item.name), path.join(copyTo, item.name)
+        )
     }
 };
 

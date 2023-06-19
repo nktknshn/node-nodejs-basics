@@ -3,9 +3,11 @@ import { createReadStream } from 'node:fs';
 import path from 'path';
 
 const getAbsolutePath = (relativePath) => {
-    return path.join(path.dirname(new URL(import.meta.url).pathname), relativePath)
+    return path.join(
+        path.dirname(new URL(import.meta.url).pathname), 
+        ...relativePath.split(path.sep)
+    )
 };
-
 const getFileHash = (file) => new Promise((resolve, reject) => {
     const hash = createHash('sha256')
     const fileStream = createReadStream(file)
